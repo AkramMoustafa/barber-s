@@ -1,0 +1,95 @@
+import { useBooking } from '../context/BookingContext'
+
+const categories = [
+  {
+    title: 'Cuts',
+    items: [
+      { name: 'Haircut', price: '$22', desc: 'Precision cut with clippers and/or shears, finished with a style.' },
+      { name: 'Fade', price: '$28', desc: 'Skin, low, mid, or high fade — clean and blended to perfection.' },
+      { name: "Kids' Haircut", price: '$16', desc: 'For kids 12 and under. Quick, friendly, and clean.' },
+    ],
+  },
+  {
+    title: 'Beard Services',
+    items: [
+      { name: 'Beard Trim', price: '$15', desc: 'Shape, line, and detail your beard for a polished look.' },
+      { name: 'Haircut + Beard', price: '$35', desc: 'The complete package — fresh cut and a clean beard trim.' },
+    ],
+  },
+]
+
+export default function Services() {
+  const { openBooking } = useBooking()
+
+  return (
+    <div className="pt-16 md:pt-20">
+
+      <section className="py-20 px-4 bg-white border-b border-stone-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-stone-400 text-xs tracking-[0.2em] uppercase mb-3 font-sans">Menu</p>
+          <h1 className="text-4xl sm:text-5xl text-black tracking-tight mb-4">
+            Services & Pricing
+          </h1>
+          <div className="w-10 h-px bg-black mx-auto mb-4" />
+          <p className="text-stone-400 max-w-sm mx-auto text-sm leading-relaxed">
+            Straightforward services, honest prices. Walk in or book ahead.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-3xl mx-auto space-y-16">
+          {categories.map((cat) => (
+            <div key={cat.title}>
+              <div className="flex items-center gap-4 mb-6">
+                <h2 className="text-xs tracking-[0.2em] uppercase font-sans font-normal text-stone-400 whitespace-nowrap">{cat.title}</h2>
+                <div className="flex-1 h-px bg-stone-200" />
+              </div>
+              <div className="divide-y divide-stone-100">
+                {cat.items.map((item) => (
+                  <div key={item.name} className="flex items-center justify-between gap-6 py-5">
+                    <div className="flex-1">
+                      <div className="font-serif text-black text-lg mb-0.5">{item.name}</div>
+                      <p className="text-stone-400 text-sm font-sans">{item.desc}</p>
+                    </div>
+                    <span className="text-black text-2xl tabular-nums font-sans">{item.price}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="pb-12 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="border border-stone-200 p-6 text-stone-400 text-sm space-y-2 font-sans">
+            <p>Walk-ins welcome — or book ahead for guaranteed availability.</p>
+            <p>Prices subject to change. Check our booking page for current pricing.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-black">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl text-white tracking-tight mb-4">Book Your Appointment</h2>
+          <p className="text-stone-400 mb-8 text-sm font-sans">Tue – Sat, 10 AM to 6 PM. Walk-ins always welcome.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={openBooking}
+              className="bg-white hover:bg-stone-100 text-black font-normal px-8 py-4 text-sm tracking-wide uppercase transition-colors"
+            >
+              Book Now
+            </button>
+            <a
+              href="tel:+12315315120"
+              className="border border-stone-700 hover:border-white text-white font-normal px-8 py-4 text-sm tracking-wide uppercase transition-colors"
+            >
+              (231) 531-5120
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
